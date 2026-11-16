@@ -1,0 +1,29 @@
+# ============================================================
+# YT Transcript Video - Render blueprint (unified full-stack)
+#
+# One web service runs BOTH processes (API :8000 + frontend :3000)
+# with `node start-all.js`. The frontend proxies /api to the backend
+# internally, so Render only needs to expose one port.
+#
+# Deploy:  push this folder to GitHub, then in the Render dashboard
+#          choose "New + > Blueprint" and point it at the repo.
+# ============================================================
+services:
+  - type: web
+    name: yt-transcript-video
+    runtime: node
+    plan: free            # upgrade as needed
+    region: oregon        # pick the region closest to your users
+    buildCommand: npm install
+    startCommand: node start-all.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: API_PORT
+        value: "8000"
+      - key: FRONTEND_PORT
+        value: "3000"
+      # Custom domains are added in the Render dashboard after purchase:
+      #   yttranscriptvideo.com + www.yttranscriptvideo.com
+      # Render issues free automatic TLS (Let's Encrypt) for them.

@@ -1,0 +1,25 @@
+{
+  "name": "yt-transcript-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "YT Transcript Video - Extract YouTube video transcripts & thumbnails instantly",
+  "main": "server.js",
+  "scripts": {
+    "start": "node start-all.js",
+    "start:api": "node server.js",
+    "start:web": "node frontend.js",
+    "dev": "node start-all.js",
+    "test": "node smoke-test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bgutils-js": "^4.0.3",
+    "jsdom": "^23.2.0",
+    "youtubei.js": "^18.3.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.163.0"
+  }
+}
